@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+
+<html  xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body ng-app="myApp">
+
+    <a href="Page1.html">user</a>
+
+    <div ng-view></div>
+    <div class="container" ng-controller="AppCtrl">
+        <h2>Employee view</h2>
+        <form>
+
+            <input placeholder="firstname" name="name" ng-model="employee.name" />
+            <input placeholder="points" name="points" ng-model="employee.points" />
+            <button ng-click="addEmployee()">ADD</button>
+            <button ng-click="UpdateEmployee()">Update</button>
+        </form>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Firstname</th>
+                    <th>Lastname</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="employee in employeelist">
+                    <td>{{employee.name}}</td>
+                    <td>{{employee.points}}</td>
+                    <td><button ng-click="remove(employee.id)">Delete</button></td>
+                    <td><button ng-click="edit(employee.id)">edit</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.5/angular.min.js"></script>
+    <script src="controller/controller.js"></script>
+</body>
+</html>
