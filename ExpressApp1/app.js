@@ -64,6 +64,27 @@ app.get('/api/ninjas', function (req, res) {
 
 });
 
+
+app.get('/api/ninjas/emp', function (req, res) {
+    
+
+    request.query("select id from employee ", function (err, rows, fields) {
+
+        if (!err) {
+           
+            res.send(rows.recordset);
+
+
+        }
+        else {
+            res.status(404).send({ error: err });
+        }
+
+
+    });
+
+});
+
 app.get('/api/user', function (req, res) {
 
     request.query("select * from Persons", function (err, rows, fields) {

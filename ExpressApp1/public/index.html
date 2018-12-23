@@ -6,6 +6,7 @@
 
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <meta charset="utf-8" />
     <title></title>
 </head>
@@ -17,7 +18,9 @@
     <div class="container" ng-controller="AppCtrl">
         <h2>Employee view</h2>
         <form>
-
+            <select id="employee_id">
+                <option selected disabled>Choose here</option>
+            </select>
             <input placeholder="firstname" name="name" ng-model="employee.name" />
             <input placeholder="points" name="points" ng-model="employee.points" />
             <button ng-click="addEmployee()">ADD</button>
@@ -44,5 +47,27 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.5/angular.min.js"></script>
     <script src="controller/controller.js"></script>
+    <script>
+        $(function () {
+            $.ajax({
+                url: "http://localhost:1337/api/ninjas/emp",
+                dataType: "json",
+                type: "GET",
+                async: true,
+                success: function (data) {
+                    console.log(data);
+                    var options = '';
+                    $.each(data, function (key, value) {
+                        console.log(value.id);
+                        options += '<option>' + value.id + '</option>';
+                    });
+                    $('#employee_id').append(options);
+                },
+                error(jqXHR, textStatus, errorThrown) {
+                    alert('Something wrong happened because: ' + errorThrown)
+                }
+            });
+        });
+    </script>
 </body>
 </html>
